@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MovieApi from "./movieApi";
+import FavoriteClick from "./favBoton";
 import "./movieList.css";
 
 const MovieList = () => {
@@ -13,24 +14,27 @@ const MovieList = () => {
         fetchData();
     }, []);
 
-    return(
-        <div className="listPopularMovies">
+    return (
+        <div className="listAllMovies">
             <ul className="listMovies">
                 {Peliculas.map((Pelicula) => (
                     <li key={Pelicula.id}>
                         {Pelicula.name}
                         <div className="movieDetails">
+                            <img
+                                src={`https://image.tmdb.org/t/p/w500${Pelicula.poster_path}`}
+                                alt={Pelicula.title}
+                            />
                             <p>{Pelicula.original_title}</p>
-                            <img src={`https://image.tmdb.org/t/p/w500${Pelicula.poster_path}`} alt={Pelicula.title} />
-                            <p>{Pelicula.vote_average}</p>
-                            <p>Release Date: {Pelicula.release_date}</p>
+                            {/* <p>{Pelicula.release_date}</p> */}
+
                         </div>
-                        {/* <button onClick={() => eliminarPeliculaClick(Pelicula.id)}>Delete</button> */}
+                        <FavoriteClick pelicula={Pelicula} />
                     </li>
                 ))}
             </ul>
         </div>
-    )
-}
+    );
+};
 
 export default MovieList;
